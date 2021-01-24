@@ -1,5 +1,9 @@
 import React from 'react';
 import NewPad from './NewPad';
+
+const mybox={color:'navy',width:'68vw', height:'50vh',}; //textarea style
+const myboxView={color:'red',width:'68vw', height:'50vh',}; //textarea style
+
 class MyBody extends React.Component{
     constructor(props){
         super(props);
@@ -22,6 +26,7 @@ class MyBody extends React.Component{
         // this.displayMe=this.displayMe.bind(this);
 
     }
+    
     // handleviewEdit(event){
     //     event.preventDefault();
         
@@ -48,23 +53,24 @@ class MyBody extends React.Component{
     }
     render(){
         // const show=!this.state.viewFlag?'true':'false';// Edit flag
-        
+        //handle file content view in button.
         const fileList=this.state.files.map((i)=>{
-                        let v=i;
-                        let k=i;
-                        let c='';
-                        let i2;
-                        if(i.length > 15){
-                            c=k.substring(0,14);
-                            c+='...';
-                            v=c;
-                        }    
-                        return (
-                               <li><button title={i} onClick={this.handleClickView} className='btn btn-info' value={i}> {v} </button></li>
-                            );
-            });
+            let v=i;    
+            let c='';//custom text with ...
+            if(i.length > 15){
+                c=i.substring(0,14);
+                c+='...';
+                v=c;
+            }    
+            return(
+                <li>
+                    <button title={i} onClick={this.handleClickView} className='btn btn-info' value={i}> 
+                        {v} 
+                    </button>
+                </li>
+            );
+        });
         
-        const mybox={color:'red',width:'68vw', height:'50vh',};
         return(
             <div className='App-body row'>
                 <div className='row'>
@@ -78,28 +84,16 @@ class MyBody extends React.Component{
                         <label className=''><h3>Available Files</h3></label> 
                         <hr />
                         
-                        <ol style={{ overflowY: 'scroll' , maxHeight:'34vh',}}>
-                        {fileList}
+                        <ol style={{ overflowY: 'scroll' , height:'34vh',}}>
+                            {fileList}
                         </ol>
                         {/* <button className='btn btn-danger'> Clear All</button> */}
                     </div>
                     
                     <div className='col-xs-9'>
                         { this.state.viewFlag==false ?
-                        <NewPad value={this.state.input}  handleChange={this.handleChange} handleClick={this.handleClick} reset={this.handleReset} /> :
-                        <div>
-                            <label>File Content</label> <br />
-                            
-                            {/* <button className='btn btn-info' onClick={this.handleviewEdit}>
-                                    Edit
-                            </button> */}
-
-                            <button className=' btn btn-danger' onClick={this.handleviewClose}>
-                                    Close
-                            </button>
-                            
-                            <textarea value={this.state.data} className='form-control' style={mybox} ></textarea>
-                        </div>
+                        <NewPad fileTitle="New File Content" value={this.state.input}  handleChange={this.handleChange} handleClick={this.handleClick} reset={this.handleReset} myStyle={mybox} /> :
+                        <FileView fileTitle="File Content" btnClose={this.handleviewClose} data={this.state.data} myStyle={myboxView} />
                         }
                     </div>
 
@@ -136,5 +130,17 @@ class MyBody extends React.Component{
         
     }
     
+}
+function FileView(props) {
+    return(
+        <div>
+            <label>{props.fileTitle}</label> <br />     
+            {/* <button className='btn btn-info' onClick={this.handleviewEdit}>
+                    Edit
+            </button> */}
+            <button className=' btn btn-danger' onClick={props.btnClose}>Close</button>
+            <textarea value={props.data} className='form-control' style={props.myStyle} ></textarea>
+        </div>
+    );
 }
 export default MyBody;
