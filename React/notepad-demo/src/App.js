@@ -10,7 +10,7 @@ class App extends React.Component{
   render(){
     return(
     <div className='App'>
-      <Header title='NotePad Demo Head'/>
+      <Header title='NotePad Demo'/>
       <Body title='Welcome To React' />
       <Footer title='Copyright @ Dharm Vashisth'/>
     </div>
