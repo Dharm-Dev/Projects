@@ -1,9 +1,7 @@
 import React from 'react';
 import NewPad from './NewPad';
-
 const mybox={color:'navy',width:'48vw', height:'50vh',}; //textarea style
 const myboxView={backgroundColor:'lime' ,color:'red',width:'48vw', height:'50vh',}; //textarea style
-
 class MyBody extends React.Component{
     constructor(props){
         super(props);
@@ -22,7 +20,7 @@ class MyBody extends React.Component{
         // this.handleviewEdit=this.handleviewEdit.bind(this);
         this.handleClearAll=this.handleClearAll.bind(this);
 
-        this.setFlag=this.setFlag.bind(this);
+        // this.setFlag=this.setFlag.bind(this);
         this.handleChange=this.handleChange.bind(this);
         this.handleReset=this.handleReset.bind(this);
         // this.displayMe=this.displayMe.bind(this);
@@ -82,6 +80,7 @@ class MyBody extends React.Component{
                 <div className='row'>
                     
                     <div className='col-xs-5'>
+
                         <label className=''><big>Available Files</big></label> 
                         <hr />
                         {/* Available File */}
@@ -91,12 +90,11 @@ class MyBody extends React.Component{
                                 :
                             <ol style={{ overflowY: 'scroll' , height:'34vh',}}>
                                 {fileList}
-                            </ol> 
-                             
-                            
+                            </ol>  
+                         
                         }
-                        {(this.state.viewFlag===false)?<button className='btn btn-danger' onClick={this.handleClearAll}> Clear All</button>:<p></p>}
-                        {/* displayed based on the flag or clearAll button */}
+                        { (this.state.viewFlag===false)?<button className='btn btn-danger' onClick={this.handleClearAll}> Clear All</button>:<p></p>}
+                        {/* displayed based on the view flag or clearAll button */}
 
                     </div>
                     
@@ -113,11 +111,11 @@ class MyBody extends React.Component{
             </div>
         );
     }
-    setFlag(){
-        this.setState({
-            viewFlag:false,
-        })
-    }
+    // setFlag(){
+    //     this.setState({
+    //         viewFlag:false,
+    //     })
+    // }
     handleClearAll(event){
         event.preventDefault();
         this.setState({
@@ -141,7 +139,7 @@ class MyBody extends React.Component{
         event.preventDefault();
         const value=this.state.input;
         if(value===''){
-
+            //do nothing
         }
         else{
             if(this.state.clearAllFlag){
@@ -166,14 +164,13 @@ function FileView(props) {
         <p>
 
             <label>{props.fileTitle}</label> <br />     
-            {/* <button className='btn btn-info' onClick={this.handleviewEdit}>
-                    Edit
-            </button> */}
-                    <button className=' btn btn-info' onClick={props.btnClose}>Edit</button>
-                    <button className=' btn btn-danger' onClick={props.btnClose}>Close</button>                    
-            <textarea value={props.data} className='form-control' style={props.myStyle} readOnly> </textarea>
-            <br />
-        </p>:<p> </p>}
+                <button className=' btn btn-danger' onClick={props.btnClose}>Close</button>                    
+                <textarea value={props.data} className='form-control' style={props.myStyle} readOnly> </textarea>
+                <br />
+        </p>
+        :
+        // do nothing
+        <p> </p>}
         </div>
     );
 }
