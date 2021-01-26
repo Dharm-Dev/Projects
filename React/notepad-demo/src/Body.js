@@ -26,31 +26,6 @@ class MyBody extends React.Component{
         // this.displayMe=this.displayMe.bind(this);
 
     }
-    
-    // handleviewEdit(event){
-    //     event.preventDefault();
-        
-    //     this.setState({
-    //         rflag:true,
-    //         data:'',
-    //     });
-    // }
-    handleviewClose(event){
-        event.preventDefault();
-        
-        this.setState({
-            viewFlag:false,
-            data:'',
-        });
-    }
-    handleClickView(event){
-        event.preventDefault();
-        const val=event.target.value;
-        this.setState({
-            viewFlag:true,
-            data:val,
-        });
-    }
     render(){
         // const show=!this.state.viewFlag?'true':'false';// Edit flag
         //handle file content view in button.
@@ -110,6 +85,30 @@ class MyBody extends React.Component{
             
             </div>
         );
+    }
+    // handleviewEdit(event){
+    //     event.preventDefault();
+        
+    //     this.setState({
+    //         rflag:true,
+    //         data:'',
+    //     });
+    // }
+    handleviewClose(event){
+        event.preventDefault();
+        
+        this.setState({
+            viewFlag:false,
+            data:'',
+        });
+    }
+    handleClickView(event){
+        event.preventDefault();
+        const val=event.target.value;
+        this.setState({
+            viewFlag:true,
+            data:val,
+        });
     }
     // setFlag(){
     //     this.setState({

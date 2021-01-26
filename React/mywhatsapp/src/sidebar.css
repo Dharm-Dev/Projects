@@ -1,0 +1,41 @@
+.sidebar{
+    background-color: cadetblue;    
+    /* width: 25vw; */
+    /* padding: 2px; */
+    /* padding-bottom: 12px; */
+    height: 90vh;
+    overflow: auto;            
+}
+
+.header{
+    background-color: rgb(115, 216, 219);
+    display: flex;
+    justify-content: space-between;
+    height: auto;
+    
+}
+.btnSearch{
+    color: red !important;
+    width: auto; 
+}
+.search{
+    height: auto;
+    display: flex;
+    flex-direction: row;
+    background-color: white;
+}
+.chat{
+    /* line-height: 15vh; */
+    background-color: rgb(253, 244, 205);
+    min-height: 75vh;
+    overflow: auto;
+    display: flex;
+    flex-direction: column;
+    /* justify-content: space-evenly; */
+
+}
+#profile{
+    border:1px solid white;
+    display: flex;
+    
+}

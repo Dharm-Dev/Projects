@@ -1,0 +1,64 @@
+.chatbody{
+    background-color: black;
+    height: 90vh;
+    min-width: 70vw;
+    margin:0px
+    /* padding: 2px; */
+}
+.Header{
+    background-color: cadetblue;
+    min-height: 15vh;
+    display: flex;
+    justify-content: safe;
+}
+.name{
+    text-align: center;
+    font-size: x-large;
+}
+.Body{
+    /* background-color: cornsilk; */
+    background-image: url("https://th.bing.com/th/id/OIP.kU0hfzTvJUzGZ1hHJWIyuAHaNL?w=182&h=324&c=7&o=5&dpr=1.5&pid=1.7");
+    background-size: cover;
+    height: 70vh;
+    overflow: auto;
+    /* text-align: left; */
+    /* display: flex; */
+    /* flex-flow: column; */
+}
+#sender{
+    display: block;
+    text-align: left;
+    padding: 2px;
+    min-height: 5vh;
+    height: auto;
+}
+#receiver{
+    display: block;
+    text-align: right;
+    padding: 2px;
+    min-height: 5vh;
+}
+#sendMessage{
+    display: inline-block;
+    width: 25vw;
+    border: 2px solid white;
+    background-color: rgb(138, 214, 123);
+    border-radius: 10px;
+}
+#receiveMessage{
+    display: inline-block;
+    max-width: 25vw;
+    border: 2px solid whitesmoke;
+    background-color: white;
+    border-radius: 10px;
+    
+}
+
+
+.Footer{
+    background-color: rgb(74, 114, 116);
+    height: 5vh;
+    display: flex;
+    overflow: hidden;
+    /* height: auto; */
+}
