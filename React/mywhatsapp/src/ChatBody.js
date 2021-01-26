@@ -2,7 +2,15 @@ import './chatbody.css';
 import {IconButton} from "@material-ui/core";
 import VideoCallIcon from '@material-ui/icons/VideoCall';
 import CallIcon from '@material-ui/icons/Call';
-
+const smessage=['I have sent the message','I have sent the message2','I have sent the message3','I have sent the message4'];
+const rmessage=['I have receive the message','I have receive the message2','I have receive the message3','I have receive the message4'];
+// const rmessage=['12'='32', '12'='32','12'='32'];
+const send=smessage.map((i,k)=>(k%2===0)&&
+        <Sender id={k} message= {i} time='3:05 am'/>
+    );
+const receive=rmessage.map((i,k)=>(k%2===0)&&
+    <Receiver message= {i} key={k} time='3:05 am'/>
+);
 function ChatBody(props){
     const pre="https://avatars.dicebear.com/4.5/api/male/";
     const post=Math.random() +".svg";
@@ -10,24 +18,20 @@ function ChatBody(props){
     const fname=props.name;
     return(
         <div className='fullbody'>
-                <ChatHeader profilePic={final}  pname={fname}/>
-           
+            {/* Chat heading */}
+            <ChatHeader profilePic={final}  pname={fname}/>
+           {/* Chat Body */}
             <div className='col-lg-12 col-md-12 col-sm-12 col-xs-12 chatBody'>
-                <Sender message='I have sent the message'  time='3:09 AM' />
-                <Receiver message='I am Received now'  name='Ram'  time='3:15 AM' />
-                <Sender message='I have sent the message' time='3:09 AM' />
-                <Receiver message='I am Received now' name='Ram'  time='3:15 AM' />
-                <Sender message='I have sent the message' time='3:09 AM' />
-                <Receiver message='I am Received now' name='Ram' time='3:15 AM' />
-                <Receiver message='I am Received now2' name='Ram' time='3:15 AM' />
-                <Receiver message='I am Received now3' name='Ram' time='3:15 AM' />
-                
+                {send}
+                {receive}
                 <Sender message='I have sent the message 2'  time='3:09 AM' />
                 <Receiver message='I am Received 2 now' name='Ram' time='3:15 AM' />
+                {send}
+                {receive}
                 <Sender message='I have sent the message 3'  time='3:09 AM' />
                 <Receiver message='I am Received 3 now' name='Ram' time='3:15 AM' />
             </div>
-
+            {/* chat Footer */}
             <ChatBottom />    
         </div>
     );
@@ -55,8 +59,11 @@ function Sender(props){
     return(
     <div id='sender'>
         <span id='sendMessage'>
+            {/* owner name */}
+        <span style={{float:'left'}}> You </span>     
         <p align='right'><small>{props.time}</small></p>
-           <p>{props.message}</p>
+        <hr />
+         <p>{props.message}</p>
            {/* <p align='right'><span className='glyphicon glyphicon-check'></span></p> */}
         </span>
         
@@ -65,10 +72,15 @@ function Sender(props){
 }
 function Receiver(props){
     return(
+
         <div id='receiver'>
-            <div>{props.name}</div> 
+     
             <span id='receiveMessage' >
+                {/* sender name */}
+                <span style={{color:'black',backgroundColor:'white',float:'left'}}>{props.name} </span>     
+                {/* time */}
                 <p align='right'><small>{props.time}</small></p>
+                <hr />
                 <p>{props.message}</p>
                 {/* <p align='right'><span className='glyphicon glyphicon-check'></span></p> */}
             </span>
@@ -83,7 +95,7 @@ function ChatBottom(props){
             {/* </div>
             <div className='col-*-8'> */}
            
-            <textarea type='text' className='form-control' placeholder='Message' rows='1' ></textarea>
+            <textarea type='text' className='form-control' placeholder='Message' rows='1'></textarea>
             {/* </div>
             <div className='col-*-2'> */}
             <button className='btn btn-default'><i className='glyphicon glyphicon-send'></i></button>

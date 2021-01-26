@@ -3,6 +3,7 @@ import SideBar from './SideBar';
 import ChatBody from './ChatBody';
 
 function App() {
+  const uname="Admin";
   const mem=['Dharm','Manoj ','Sourav','Manish','Manipal','Mohit','Survesh','Naresh'];
   const index=Math.floor(Math.random()*mem.length);
   const randProfile=mem[index];
@@ -10,7 +11,7 @@ function App() {
   return ( 
     <div className="App">
        <div className='left' > 
-          <SideBar mlist={mem}/>
+          <SideBar mlist={mem} uname={uname}/>
        </div>
        <div className='right'> 
             <ChatBody name={randProfile}/>

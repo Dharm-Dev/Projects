@@ -14,13 +14,17 @@
     /* background-color: red; */
     /* color:blue */
 }
-
+.userName{
+    font-size: x-large;
+    font-family: Georgia, 'Times New Roman', Times, serif;
+}
 .Sheader{
     /* background-color: rgb(54, 223, 238); */
     background-color: rgba(25, 141, 187, 0.9);
     /* display: flex; */
     justify-content: space-between;
     min-height: 11vh;
+    /* height:100%; */
 }
 .btnSearch{
     color: rgba(25, 141, 187, 0.9) !important;
