@@ -1,41 +1,62 @@
 .sidebar{
-    background-color: cadetblue;    
-    /* width: 25vw; */
+    /* background-color: blanchedalmond;     */
+    width: 100%;
+    background-image: url("https://th.bing.com/th/id/OIP.kU0hfzTvJUzGZ1hHJWIyuAHaNL?w=182&h=324&c=7&o=5&dpr=1.5&pid=1.7");
+    min-width: 20vw; 
+    /* min-width: 12vw; */
     /* padding: 2px; */
     /* padding-bottom: 12px; */
     height: 90vh;
-    overflow: auto;            
+    /* overflow: auto; */
+}
+::-webkit-scrollbar{
+    width: 1px;
+    /* background-color: red; */
+    /* color:blue */
 }
 
-.header{
-    background-color: rgb(115, 216, 219);
-    display: flex;
+.Sheader{
+    /* background-color: rgb(54, 223, 238); */
+    background-color: rgba(25, 141, 187, 0.9);
+    /* display: flex; */
     justify-content: space-between;
-    height: auto;
-    
+    min-height: 11vh;
 }
 .btnSearch{
-    color: red !important;
+    color: rgba(25, 141, 187, 0.9) !important;
     width: auto; 
 }
+
 .search{
-    height: auto;
+    margin:5px;
+    min-height: 5vh;
     display: flex;
-    flex-direction: row;
-    background-color: white;
+    /* flex-direction: row; */
+    
 }
 .chat{
     /* line-height: 15vh; */
-    background-color: rgb(253, 244, 205);
-    min-height: 75vh;
+    /* background-color: white; */
+    max-height: 72.7vh;
+    /* height:100%; */
     overflow: auto;
-    display: flex;
-    flex-direction: column;
+    /* display: flex; */
+    /* flex-direction: column; */
+
     /* justify-content: space-evenly; */
 
 }
 #profile{
     border:1px solid white;
     display: flex;
-    
+    background-color: rgba(25, 141, 187, 0.7);
+    color:white;
+    /* background-color: rgb(243, 240, 225); */
+    justify-content: space-evenly;
+    margin:5px;
+
+}
+#time{
+    color:white;
+    font-size: 10px;
 }

@@ -9,43 +9,46 @@ import MoreVertIcon from '@material-ui/icons/MoreVert';
 // import {Icon} from "@material-ui/core";
 
 function Sidebar(props){
+    const mem=props.mlist;
+    const memberList=mem.map((i)=><Member name={i}/>);
     return(
-        <div className='sidebar'>
-            <div className='header'>
-            {/* <Avatar /> */}
-                <IconButton>
-                    <AccountCircleRoundedIcon />
-                </IconButton>
-                
-                <div className='header-right'>
+    <div className='sidebar'>
+        
+        <div className='top'>
+
+          <div className='Sheader'>
+               <div className='col-sm-4 col-lg-4 col-md-4 col-xs-4 '>  
+                    <img src="https://avatars.dicebear.com/4.5/api/male/ak32qwe21.svg" className='img img-responsive img-circle avtar' width="55vh"/>
+                </div>
+                {/* right icons */}
+                <div className='header-right col-sm-8 col-xs-8 col-lg-8 col-md-8' align='right'>
                     <IconButton>
                         <DonutLargeRoundedIcon />
                     </IconButton>
-                    
                     <IconButton>
                         <ChatIcon />
                     </IconButton>
-
                     <IconButton>
                         <MoreVertIcon />
                     </IconButton>
-                    {/* <MoreVertIcon /> */}
                 </div>
+            </div>
 
+            {/* search icon */}
+            <div className='col-md-12 col-sm-12 col-xs-12 col-lg-12 search  '>
+               <input type='text' placeholder='Search Contact'  className='form-control'/>
+               <button class='btn btn-default btnSearch'> 
+                    <span className='glyphicon glyphicon-search'></span>
+                </button>
             </div>
-            
-            <div className='search form-group'>
-               <input type='text' placeholder='Search Contact'  className='form-control '/>
-                <IconButton><SearchIcon /></IconButton>
-            </div>
-    
-            <div className='chat'>
-                <Member name='Rohan' />
-                <Member name='Mohan' />
 
-            </div>
+        </div>  
+        {/* Chat Scroll Name */}
         
+        <div className='chat col-sm-12 col-xs-12 col-lg-12 col-md-12'> 
+                {memberList}
         </div>
+    </div>
     );
 }
 function Member(props){
@@ -53,14 +56,14 @@ function Member(props){
     const post=Math.random() +".svg";
     const final=pre+post;
     return(
-        <div id='profile' className='btn '>
-            <img  width="45px" className='img img-responsive' src={final} alt='Avatar'/>
-            
+        <div className='btn' id='profile'>
+            <img  width="45px" src={final} className='img img-responsive img-circle avtar'  alt='Avatar'/>
             <div>
-               
-                <br></br>
-                <p>Myself {props.name}</p>
+                <p>{props.name}</p>
                 <p><small>Last Message</small></p>
+            </div>
+            <div align='right'>
+                <small id='time'>23.32am</small>
             </div>
         </div>
     );

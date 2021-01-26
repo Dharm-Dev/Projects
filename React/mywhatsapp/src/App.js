@@ -1,13 +1,20 @@
 import './App.css';
 import SideBar from './SideBar';
 import ChatBody from './ChatBody';
-// import {Avatar} from "@material-ui/core";
 
 function App() {
-  return (
+  const mem=['Dharm','Manoj ','Sourav','Manish','Manipal','Mohit','Survesh','Naresh'];
+  const index=Math.floor(Math.random()*mem.length);
+  const randProfile=mem[index];
+  // random name
+  return ( 
     <div className="App">
-        <SideBar />
-        <ChatBody />
+       <div className='left' > 
+          <SideBar mlist={mem}/>
+       </div>
+       <div className='right'> 
+            <ChatBody name={randProfile}/>
+       </div>
     </div>
   );
 }

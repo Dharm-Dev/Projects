@@ -1,26 +1,49 @@
-.chatbody{
-    background-color: black;
+.fullbody{
+    /* background-color: black; */
     height: 90vh;
-    min-width: 70vw;
-    margin:0px
+    /* min-width: 70vw; */
+    width: 100%;
+    /* min-width: 78vw; */
+    /* overflow: unset; */
     /* padding: 2px; */
 }
-.Header{
-    background-color: cadetblue;
-    min-height: 15vh;
-    display: flex;
-    justify-content: safe;
+#headLeft{
+    /* justify-content: space-between; */
+    background-color: lavenderblush;
+    /* float: left; */
 }
+#headRight{
+    opacity: 0.3;
+    text-align: right;
+    background-color: hotpink;
+}
+.chatFooter,.chatHeader{
+    background-color: rgba(25, 141, 187, 0.7);
+}
+.chatHeader{
+    min-height: 10vh;
+    /* display: flex; */
+    /* justify-content: space-between; */
+}
+
 .name{
-    text-align: center;
     font-size: x-large;
+    font-family: Georgia, 'Times New Roman', Times, serif;
 }
-.Body{
-    /* background-color: cornsilk; */
+.chatBody{
+    /* background-image: url("https://th.bing.com/th/id/OIP.M-8FPS_Iasc8ShzUpU_PDgHaHa?w=194&h=194&c=7&o=5&dpr=1.5&pid=1.7"); */
+    /* background-color: rgb(238, 177, 230); */
+    /* background-color:violet; */
+    /* background-image: url("https://th.bing.com/th/id/OIP.dULD_5I3suJr_VeleEicywHaNJ?w=187&h=333&c=7&o=5&dpr=1.5&pid=1.7"); */
+    /* background-image: url("https://th.bing.com/th/id/OIP.OQXOH0UCAVSO7zPATynYWwHaN2?w=182&h=341&c=7&o=5&dpr=1.5&pid=1.7"); */
     background-image: url("https://th.bing.com/th/id/OIP.kU0hfzTvJUzGZ1hHJWIyuAHaNL?w=182&h=324&c=7&o=5&dpr=1.5&pid=1.7");
-    background-size: cover;
-    height: 70vh;
+    /* background: url("https://www.bing.com/th?id=OIP.7STTffrWO72PrphDVpbTAwHaLH&w=120&h=160&c=8&rs=1&qlt=90&dpr=1.5&pid=3.1&rm=2"); */
+    /* background-size: cover; */
+    background-size: auto;
+    height: 71vh;
+    /* max-width: 75vw; */
     overflow: auto;
+    /* padding:5px; */
     /* text-align: left; */
     /* display: flex; */
     /* flex-flow: column; */
@@ -29,36 +52,36 @@
     display: block;
     text-align: left;
     padding: 2px;
-    min-height: 5vh;
     height: auto;
 }
 #receiver{
     display: block;
     text-align: right;
     padding: 2px;
-    min-height: 5vh;
+    height: auto;
 }
 #sendMessage{
     display: inline-block;
-    width: 25vw;
-    border: 2px solid white;
-    background-color: rgb(138, 214, 123);
-    border-radius: 10px;
+    max-width: 35vw;
+    border: 1px solid white;
+    background-color: rgb(174, 238, 161);
+    border-radius: 15px;
 }
 #receiveMessage{
     display: inline-block;
-    max-width: 25vw;
-    border: 2px solid whitesmoke;
+    max-width: 35vw;
+    border: 1px solid whitesmoke;
     background-color: white;
-    border-radius: 10px;
-    
+    border-radius: 15px;
 }
-
-
-.Footer{
-    background-color: rgb(74, 114, 116);
-    height: 5vh;
+.chatFooter{
+    /* background-color: rgb(153, 221, 42); */
+    min-height: 6vh;
+    /* position: fixed; */
+    /* top:23vh; */
     display: flex;
-    overflow: hidden;
+    justify-content: space-evenly;
+    /* margin-bottom: 2px; */
+    /* overflow: hidden; */
     /* height: auto; */
 }
