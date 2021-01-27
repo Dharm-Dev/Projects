@@ -16,9 +16,10 @@ class  Sidebar extends React.Component{
        this.toggleBtn=this.toggleBtn.bind(this);
 
         this.state=({
+            visiblemsg:'false',
             hidebtn:'false',
-            uname:' ',
-            ulastmsg:' ',
+            uname:'',
+            ulastmsg:'',
         });
     }
     toggleBtn(e){
@@ -26,18 +27,32 @@ class  Sidebar extends React.Component{
         const val=(this.state.hidebtn==='true')?'false':'true';
         this.setState({
             hidebtn:val,
+            uname:'',
+            visiblemsg:'false',
+            ulastmsg:'',
         });
     }
     addNew(e){
         e.preventDefault();
-        const pre = "https://avatars.dicebear.com/4.5/api/male/ak"+ this.state.uname;
-        if(this.state.name!=' '){
-            db.collection('peoples').add({
-                name:this.state.uname,
-                lastMessage:this.state.ulastmsg,
-                picUrl:pre+'.svg',
-            });    
+        const val=(this.state.hidebtn==='true')?'false':'true';
+        if(this.state.name!==''){
+            if(this.state.ulastmsg!=='')
+            {
+                const pre = "https://avatars.dicebear.com/4.5/api/male/ak"+Math.floor(Math.round()*3212).toLocaleString()+ this.state.uname;
+                db.collection('peoples').add({
+                    name:this.state.uname,
+                    lastMessage:this.state.ulastmsg,
+                    picUrl:pre+'.svg',
+                });
+            } 
         }
+        
+        this.setState({
+            visiblemsg:'false',
+            hidebtn:val,
+            uname:'',
+            ulastmsg:'',
+        });
         
     }
 
@@ -45,7 +60,7 @@ class  Sidebar extends React.Component{
         const v=e.target.value;
         this.setState({
             uname:v,
-            
+            visiblemsg:'true',
         });
     }
     handleChangeMsg(e){
@@ -57,7 +72,7 @@ class  Sidebar extends React.Component{
     render(){
 
     const mlist=this.props.mlist.map(room =>
-        <Member name={room.data.name} lastmsg={room.data.lastMessage} />);
+        <Member name={room.data.name} lastmsg={room.data.lastMessage} pic={room.data.picUrl}/>);
     
     return(
         <div className='sidebar'>
@@ -97,14 +112,16 @@ class  Sidebar extends React.Component{
                 </div>
             {/* new one */}
                 <div align='center' >
-                  { (this.state.hidebtn==='true')? <form><input type='text' onChange={this.handleChangeName} className='form-control' placeholder='Name' value={global.uname} />
-                    <input type='text' onChange={this.handleChangeMsg} className='form-control' placeholder='New Message' value={global.ulastmsg}  />
-                    
-                    <button  onClick={this.addNew} className='btn btn-block form-control btn-success'>Add Chat</button>
-                    <button  onClick={this.toggleBtn} className='btn btn-block form-control btn-success'>Hide</button>
-                    </form>
-                    :
-                    <button  onClick={this.toggleBtn} className='btn btn-block form-control btn-success'>Add New Chat</button>
+                  { (this.state.hidebtn==='true')&& 
+                      <input type='text' onChange={this.handleChangeName} className='form-control' placeholder='Name' value={global.uname} />
+                   }
+                   {(this.state.visiblemsg=='true') && <input type='text' onChange={this.handleChangeMsg} className='form-control' placeholder='New Message' value={global.ulastmsg} />}
+
+                   { this.state.hidebtn==='true' && <input type='submit' onClick={this.addNew} className='btn btn-block form-control btn-success' value='Create User' /> }
+                    {/* <button  onClick={this.addNew} className='btn btn-block form-control btn-success'>Add Chat</button> */}
+                   {this.state.hidebtn==='true' ? <button  onClick={this.toggleBtn} className='btn btn-block form-control btn-success'>Cancel</button> 
+                   :
+                    <button  onClick={this.toggleBtn} className='btn btn-block form-control btn-success'>Add New User</button>
                     }
                 </div>
 
@@ -118,12 +135,12 @@ class  Sidebar extends React.Component{
     }
 }
 function Member(props){
-    const pre="https://avatars.dicebear.com/4.5/api/male/";
-    const post=Math.random() +".svg";
-    const final=pre+post;
+    // const pre="https://avatars.dicebear.com/4.5/api/male/";
+    // const post=Math.random() +".svg";
+    // const final=pre+post;
     return(
         <div className='btn' id='profile'>
-            <img  width="45px" src={final} className='img img-responsive img-circle avtar'  alt='Avatar'/>
+            <img  width="45px" src={props.pic} className='img img-responsive img-circle avtar'  alt='Avatar'/>
             <div>
                 <p>{props.name}</p>
                 <p><small>{props.lastmsg}</small></p>

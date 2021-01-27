@@ -27,7 +27,7 @@ function App() {
   return ( 
     <div className="App">
        <div className='left' >      
-          <SideBar mlist={rooms} uname="listn" />
+          <SideBar mlist={rooms} uname="Admin" />
        </div>
        <div className='right'> 
             <ChatBody name={"Admin"}/>
@@ -35,21 +35,21 @@ function App() {
     </div>
   );
 }
-function Member(props){
-  const pre="https://avatars.dicebear.com/4.5/api/male/";
-  const post=Math.random() +".svg";
-  const final=pre+post;
-  return(
-      <div className='btn' id='profile'>
-          <img  width="45px" src={final} className='img img-responsive img-circle avtar'  alt='Avatar'/>
-          <div>
-              <p>{props.name}</p>
-              <p><small>{props.lastmsg}</small></p>
-          </div>
-          <div align='right'>
-              <small id='time'>23.32am</small>
-          </div>
-      </div>
-  );
-}
+// function Member(props){
+//   const pre="https://avatars.dicebear.com/4.5/api/male/";
+//   const post=Math.random() +".svg";
+//   const final=pre+post;
+//   return(
+//       <div className='btn' id='profile'>
+//           <img  width="45px" src={final} className='img img-responsive img-circle avtar'  alt='Avatar'/>
+//           <div>
+//               <p>{props.name}</p>
+//               <p><small>{props.lastmsg}</small></p>
+//           </div>
+//           <div align='right'>
+//               <small id='time'>23.32am</small>
+//           </div>
+//       </div>
+//   );
+// }
 export default App;
