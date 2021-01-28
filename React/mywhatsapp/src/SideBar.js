@@ -113,9 +113,9 @@ class  Sidebar extends React.Component{
             {/* new one */}
                 <div align='center' >
                   { (this.state.hidebtn==='true')&& 
-                      <input type='text' onChange={this.handleChangeName} className='form-control' placeholder='Name' value={global.uname} />
+                      <input type='text' onChange={this.handleChangeName} className='form-control' placeholder='Name' value={global.uname} required='true' />
                    }
-                   {(this.state.visiblemsg=='true') && <input type='text' onChange={this.handleChangeMsg} className='form-control' placeholder='New Message' value={global.ulastmsg} />}
+                   {(this.state.visiblemsg=='true') && <input type='text' onChange={this.handleChangeMsg} className='form-control' placeholder='New Message' value={global.ulastmsg} required='true' />}
 
                    { this.state.hidebtn==='true' && <input type='submit' onClick={this.addNew} className='btn btn-block form-control btn-success' value='Create User' /> }
                     {/* <button  onClick={this.addNew} className='btn btn-block form-control btn-success'>Add Chat</button> */}
