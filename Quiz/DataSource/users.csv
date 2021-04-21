@@ -1,6 +1,7 @@
-userid,password,fullname
-admin,admin,Dharm
-root,123,Rocky
-rm,1234,Remo
-Mama,1212,Dvashisth5@gmail.com
-skm,skm5,Sanjay Malik
+userid,password,fullname,highscore
+admin,admin,Dharm,9.5
+root,123,Rocky,4
+Mama,121,Dvashisth5@gmail.com,3
+skm,skm5,Sanjay Malik,7
+dvashisth,Dharm,Dharm,8
+kg,kg,Karan Grover,7.8

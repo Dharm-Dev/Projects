@@ -14,20 +14,21 @@ session_start();
 </div>
 <?php
 	if($_SERVER['REQUEST_METHOD']=='POST'){
-		
 		$lname=$_POST['luname'];
 		$lpass=$_POST['lupass'];
+
 		$file=fopen("./DataSource/users.csv", 'r');
-		$line2=fgetcsv($file,',');
+		$line2=fgetcsv($file);
 		$status=0;
 		while($line2!=feof($file)){
-			$line2=fgetcsv($file,',');
+			$line2=fgetcsv($file);
 			$uin=$line2[0];
 			$pin=$line2[1];
 			if($lname==$uin && $lpass==$pin){
 				$status=1;
 				$_SESSION['userName']=$line2[2];
 				$_SESSION['counter']+=1;
+				$_SESSION['highScore']=$line2[3];
 				break;
 			}
 		

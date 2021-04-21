@@ -1,4 +1,4 @@
- <div id="myCarousel" class="carousel slide text-center" data-ride="carousel">
+ <div id="myCarousel" style="height:50vh;border:2px groove white; background:url('Image/back1.png'); " class="carousel slide text-center bg-danger " data-ride="carousel">
     <!-- Wrapper for slides -->
     <h1>User Feedback</h1>
     <div class="carousel-inner" role="listbox">
@@ -7,12 +7,12 @@
 
       $count=0;
           $file=fopen("DataSource/feedback.csv", 'r');
-          $line2=fgetcsv($file,',');
+          $line2=fgetcsv($file);
           $status=0;
-          $line2=fgetcsv($file,',');
+          $line2=fgetcsv($file);
           echo "<div class='item active'><blockquote><p>$line2[1]</p><footer><span> $line2[0]</span></footer></div>";
           while($line2!=feof($file)){
-            $line2=fgetcsv($file,',');
+            $line2=fgetcsv($file);
             $name=$line2[0];
             $msg=$line2[1];
             echo "<div class='item'><blockquote><p>$msg</p><footer>$name</footer></div>";
@@ -20,7 +20,6 @@
           }
           fclose($file);
       ?>
-
     </div>
     
     <!-- Left and right controls -->

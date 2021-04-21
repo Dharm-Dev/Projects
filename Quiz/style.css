@@ -1,0 +1,40 @@
+.navbar-nav  li a:hover {
+    color: #f4511f !important;
+  }
+   footer .glyphicon {
+    font-size: 20px;
+    margin-bottom: 20px;
+    color: #f4511e;
+  }
+  body{
+      background-color: #f5f6f7 !important;
+  }
+.row{
+    /*border:5px solid yellow;*/
+    padding: 6px;
+}
+.container{
+    /*background-color: gray;*/
+
+}
+.padding{
+    padding: 16px;
+}
+
+#loginForm{
+    display: inline-block;	
+}	
+textarea:hover,input:hover{
+    background-color: lightyellow;
+    transition: box-shadow 1s;
+    border: 1px solid #f4511e;
+
+}
+input[type='submit']:hover{
+    background-color: #f4511e;/*orange with red*/
+    color: #f5f6f4;
+}
+.footer{
+    background-color: #2f2f2f;
+    color: #fff;
+}
