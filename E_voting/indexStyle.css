@@ -1,0 +1,25 @@
+.header{
+    min-height:5vh;font-size: large;text-align: center;
+}
+#body{
+    max-height: 90vh; 
+    min-height: 75vh;
+}
+.bg-aquamarine{
+    background-color: aquamarine;
+}
+.text-blue{
+    color: blue;
+}
+.bg-lightGreen{
+    background-color: chartreuse;
+}
+.bg-violet{
+    background-color: violet;
+}
+.bg-deepSkyBlue{
+    background-color: deepskyblue;
+}
+.footer{
+    text-align: center;height: 5vh; font-size: large;
+}
