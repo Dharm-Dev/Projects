@@ -64,7 +64,7 @@ class App extends Component {
     for(let i=1;i<=this.state.totalCandidate;i++){
       var result = await this.state.contract.methods.getCandidates(i).call();
       
-      console.log(result[0]);
+      // console.log(result[0]);
       cardprofile.push(<CardProfile addr={this.state.accounts[0]} contract={this.state.contract} type={this.state.type} total={this.state.totalCandidate} name={result[1]} gender={result[2]} key={result[0]} number={result[0]} count={result[3]}/>);
     }
     this.setState({cardprofileView:cardprofile,});
@@ -117,7 +117,7 @@ class App extends Component {
       });
       this.runExample();
     }
-    else if(this.state.uname.trim()!='' && this.state.upass.trim()!=''){
+    else if(this.state.uname.trim()!=='' && this.state.upass.trim()!==''){
       this.setState({
         loginFlag:true,
         loginStatus:true,
@@ -196,7 +196,7 @@ class App extends Component {
                   {/* <input type='number' placeholder='Enter numeric value to set' onChange={this.handleValue} /> */}
                  
                  {/* Add more candidate */}
-                 {/* {
+                 {
                   (this.state.type==='admin')
                    &&
                     (
@@ -206,7 +206,7 @@ class App extends Component {
                      <hr />
                       </div>
                      )  
-                  } */}
+                  }
                   {/*                  
                   <div>The Last Retrieved value is:  <h2> {this.state.storageValue}</h2></div>
                   <button onClick={this.runExample}>Fetch Current Value</button> */}

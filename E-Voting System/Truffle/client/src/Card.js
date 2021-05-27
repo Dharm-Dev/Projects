@@ -21,10 +21,10 @@ export default (props)=>{
     
     const handleVote=async ()=>{
         
-        const response = await props.contract.methods.vote(key).send({from: "0x949A4a75b94E11c2d9C679c17a21c890737f9828"});
-        alert(response);
-        status = await props.contract.methods.getVoter("0x949A4a75b94E11c2d9C679c17a21c890737f9828").call();
-        alert(status);
+        const response = await props.contract.methods.vote(key).send({from:props.addr});
+        // alert(response);
+        status = await props.contract.methods.getVoter(props.addr).call();
+        // alert(status);
         
     }
     return(
@@ -36,7 +36,7 @@ export default (props)=>{
             {/* <div className="w3-container w3-center "> */}
                 <p>{gender} {props.name} </p>
              {(props.type==='admin')?(
-                 <p className='w3-btn w3-btn-hover'>
+                 <p className=' vote-count'>
                     Vote: {props.count}
                 </p>
              ):(
