@@ -9,7 +9,7 @@ import "./App.css";
 import './W3style.css'
 
 class App extends Component {
-  state = { uname:'admin',upass:'admin',type:'',close:false,loginFlag:false,loginStatus:false,try:false,storageValue: 0, web3: null, accounts: null, contract: null, Value:0,totalCandidate:0,getVal:0,listC:[{ }], };
+  state = {addFlag:false,errorAdd:false ,candidName:'',candidGender:'',uname:'admin',upass:'admin',type:'',close:false,loginFlag:false,loginStatus:false,try:false,storageValue: 0, web3: null, accounts: null, contract: null, Value:0,totalCandidate:0,getVal:0,listC:[{ }], };
   constructor(props){
     super(props);
   }
@@ -32,6 +32,7 @@ class App extends Component {
       // Set web3, accounts, and contract to the state, and then proceed with an
       // example of interacting with the contract's methods.
       this.setState({ web3, accounts, contract: instance }, this.runExample);
+
     } catch (error) {
       // Catch any errors for any of the above operations.
       alert(
@@ -44,7 +45,7 @@ class App extends Component {
 // setting default value
   runExample = async () => {
     
-    const { accounts, contract,} = this.state;
+    const { contract,} = this.state;
     // Stores a given value, 5 by default.
     // await contract.methods.set(this.state.Value).send({ from: accounts[0] });
 
@@ -65,7 +66,11 @@ class App extends Component {
       var result = await this.state.contract.methods.getCandidates(i).call();
       
       // console.log(result[0]);
-      cardprofile.push(<CardProfile addr={this.state.accounts[0]} contract={this.state.contract} type={this.state.type} total={this.state.totalCandidate} name={result[1]} gender={result[2]} key={result[0]} number={result[0]} count={result[3]}/>);
+      cardprofile.push(<CardProfile addr={this.state.accounts[0]} 
+        contract={this.state.contract} type={this.state.type} 
+        total={this.state.totalCandidate} name={result[1]} 
+        gender={result[2]} key={result[0]} 
+        number={result[0]} count={result[3]}/>);
     }
     this.setState({cardprofileView:cardprofile,});
   };
@@ -82,9 +87,22 @@ class App extends Component {
   addNewCandidate=async ()=>{
     const { accounts, contract,} = this.state;
     // name and then gender
-    await contract.methods.addCandidate("Sohanika","f").send({from: accounts[0]});
-    await contract.methods.addCandidate("Manshu","m").send({from: accounts[0]});
-    this.runExample();
+    if(this.state.candidName!==''&&this.state.candidGender!==''){
+      this.setState({
+        errorAdd:false,
+        addFlag:false,
+      });
+      await contract.methods.addCandidate(this.state.candidName,this.state.candidGender).send({from: accounts[0]});
+      
+        this.runExample();
+
+    }
+    else{
+      this.setState({
+        errorAdd:true,
+        addFlag:true,
+      });
+    }
   }
  
   getUsername=event=>{
@@ -93,7 +111,18 @@ class App extends Component {
         uname:n,
       })
   }
-  
+  getCandidatename=event=>{
+    var n=event.target.value;
+    this.setState({
+        candidName:n,
+      })
+  }
+  getCandidateGender=event=>{
+    var n=event.target.value;
+    this.setState({
+        candidGender:n,
+      })
+  }
   getPassword=event=>{
 
     var p=event.target.value;
@@ -165,7 +194,7 @@ class App extends Component {
 
                 <button  onClick={this.handleLogin}>Login</button>
                 <br />
-              <input type="checkbox"  name="remember" /> Remember me
+              <input type="checkbox"  name="remember" onClick={()=>{this.setState({uname:'admin',upass:'admin'})}} /> Remember me
               </div>
           </div>)
         }
@@ -178,7 +207,7 @@ class App extends Component {
                 (<div className='w3-bar w3-row logout-header'>
                  
                     <img width="50px" className='w3-left col-lg-4 w3-circle w3-image w3-responsive' 
-                       src='https://www.w3schools.com/howto/img_avatar.png'  alt='Account Image'/>
+                       src='https://www.w3schools.com/howto/img_avatar.png'  alt='Account'/>
                     <span className='col-lg-4 w3-left w3-padding' ><b>{this.state.uname.trim().toUpperCase()}</b></span>
                     <Button className='logout col-lg-4 w3-right' onClick={()=>{this.setState({loginFlag:false, loginStatus:false,try:false,close:false,uname:'',upass:''})}}>
                       Log Out
@@ -186,7 +215,7 @@ class App extends Component {
 
                     <span className='col-lg-4  w3-padding' > Welcome you as {this.state.type} User
                     <br />
-                    {(this.state.type!='admin')?<span>Normal:- You can Vote your favourite candidate only once.<i>Choose Carefully</i></span>:<span>Admin</span>}
+                    {(this.state.type!=='admin')?<span>Normal:- You can Vote your favourite candidate only once.<i>Choose Carefully</i></span>:<span>Admin</span>}
                     
                     </span>
                    
@@ -202,9 +231,35 @@ class App extends Component {
                     (
                       <div >
 
-                     <button class="w3-circle" onClick={this.addNewCandidate}>Add More Candidates</button>
-                     <hr />
+ 
+                     {/* new candidate add */}
+                      { (!this.state.addFlag)?
+                         (<div>
+                            <button class="w3-circle" onClick={()=>{this.setState({addFlag:true,})}}>Add More Candidates</button>
+                             <hr />
+                          </div>):
+                      (
+                       <div className='w3-container w3-padding container w3-full'>
+                            <label htmlFor="cname"><b>Candidate Full Name   </b></label>
+                            <input type="text"  onChange={this.getCandidatename} placeholder="Enter Username" name="uname" required />
+                            <br />
+                            <br />
+                            <label htmlFor="cgender"><b>Gender  </b></label>  
+                            
+                            <input type='radio' name='gender' onChange={this.getCandidateGender} value='M' />Male
+                            <input type='radio' name='gender' onChange={this.getCandidateGender} value='F' />Female 
+                            
+                            <br />
+                          {(this.state.errorAdd&&this.state.addFlag)&&<p className='error'>Invalid Credentials</p>}
+                          <br />
+                            <button  className='w3-btn w3-large' onClick={this.addNewCandidate}>Add Candidate</button>
+                            <br />
+
+                          </div>
+                        )
+                     }
                       </div>
+                    
                      )  
                   }
                   {/*                  
@@ -221,7 +276,9 @@ class App extends Component {
                 <div className='w3-row w3-padding  '>
                   {this.state.cardprofileView}
                 </div>
+
               </div>
+
         
              </div>
                 <div className='footer'>

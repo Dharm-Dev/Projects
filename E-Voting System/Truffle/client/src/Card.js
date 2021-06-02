@@ -10,7 +10,7 @@ export default (props)=>{
         source=(props.gender==='F'||props.gender==='f')?"https://www.w3schools.com/howto/img_avatar2.png":"https://www.w3schools.com/howto/img_avatar.png";
         key=props.number;
         gender=(props.gender==='F'||props.gender==='f')?"Mrs.":"Mr.";
-        style=(props.total%2!=0)?("w3-card-2  w3-container w3-third w3-padding w3-opacity w3-hover-opacity-off "):("w3-card-2  w3-container w3-quarter w3-padding w3-opacity w3-hover-opacity-off ");
+        style=(props.total%2!==0)?("w3-card-2  w3-container w3-third w3-padding w3-opacity w3-hover-opacity-off "):("w3-card-2  w3-container w3-quarter w3-padding w3-opacity w3-hover-opacity-off ");
     }
     else    
     {    
@@ -20,8 +20,8 @@ export default (props)=>{
     }   
     
     const handleVote=async ()=>{
-        
-        const response = await props.contract.methods.vote(key).send({from:props.addr});
+        // address from where user vote
+        await props.contract.methods.vote(key).send({from:props.addr});
         // alert(response);
         status = await props.contract.methods.getVoter(props.addr).call();
         // alert(status);
