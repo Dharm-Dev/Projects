@@ -10,6 +10,10 @@ export default (props)=>{
         source=(props.gender==='F'||props.gender==='f')?"https://www.w3schools.com/howto/img_avatar2.png":"https://www.w3schools.com/howto/img_avatar.png";
         key=props.number;
         gender=(props.gender==='F'||props.gender==='f')?"Mrs.":"Mr.";
+        if(props.gender=="NULL"){
+            source="https://tse4.mm.bing.net/th?id=OIP.OkBlug6kX0Fz5TPls3E1BAHaEX&pid=Api&P=0&w=298&h=177";//https://tse3.mm.bing.net/th?id=OIP.I_2DJoDYrJuPfppuYwpawQHaFj&pid=Api&P=0&w=202&h=153";
+            gender="";
+        }
         style=(props.total%2!==0)?("w3-card-2  w3-container w3-third w3-padding w3-opacity w3-hover-opacity-off "):("w3-card-2  w3-container w3-quarter w3-padding w3-opacity w3-hover-opacity-off ");
     }
     else    

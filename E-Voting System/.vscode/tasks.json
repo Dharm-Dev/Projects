@@ -1,0 +1,25 @@
+{
+	"version": "2.0.0",
+	"tasks": [
+		{
+			"type": "npm",
+			"script": "build",
+			"path": "Truffle/client/",
+			"group": {
+				"kind": "build",
+				"isDefault": true
+			},
+			"problemMatcher": [],
+			"label": "npm: build - Truffle/client",
+			"detail": "react-scripts build"
+		},
+		{
+			"type": "npm",
+			"script": "install",
+			"path": "Truffle/client/",
+			"problemMatcher": [],
+			"label": "npm: install - Truffle/client",
+			"detail": "install dependencies from package"
+		}
+	]
+}

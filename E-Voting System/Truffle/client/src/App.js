@@ -9,10 +9,32 @@ import "./App.css";
 import './W3style.css'
 
 class App extends Component {
-  state = {addFlag:false,errorAdd:false ,candidName:'',candidGender:'',uname:'admin',upass:'admin',type:'',close:false,loginFlag:false,loginStatus:false,try:false,storageValue: 0, web3: null, accounts: null, contract: null, Value:0,totalCandidate:0,getVal:0,listC:[{ }], };
+  state = {status:"false",addFlag:false,errorAdd:false,candidConstituency:'Nelhi' ,candidName:'',candidParty:'',candidNumber:'',candidEmail:'',candidPan:'',candidGender:'',uname:'admin',upass:'admin',type:'',close:false,loginFlag:false,loginStatus:false,try:false,storageValue: 0, web3: null, accounts: null, contract: null, Value:0,totalCandidate:0,getVal:0,listC:[{ }], };
   constructor(props){
     super(props);
   }
+  // 70 CONSTITUENCIES OF DELHI
+   constituencyDelhi=["Nerela","Burari","Timarpur","Adarsh Nagar","Badli","Rithala","Bawana","Mundka","Kirari",	
+                  "Sultanpur Majra","Nangloi","Mangol Puri","Rohini","Shalimar Bagh","Shakur Basti","Tri Nagar",
+                  "Wazirpur","Model Town","Sadar Bazar","Chandni Chowk","Matia Mahal","Ballimaran","Karol Bagh",
+                  "Patel Nagar","Moti Nagar","Madipur","Rajouri Garden","Hari Nagar","Tilak Nagar","Janakpuri",
+                  "Vikaspuri","Uttam Nagar","Dwarka","Matiala","Najafgarh","Bijwasan","Palam","Delhi Cantonment",
+                  "Rajinder Nagar","New Delhi","Jangpura","Kasturba Nagar","Malviya Nagar","R K Puram","Mehrauli",
+                  "Chhatarpur","Deoli","Ambedkar Nagar","Sangam Vihar","Greater Kailash","Kalkaji","Tughlkabad",
+                  "Badarpur","Okhla","Trilokpuri","Kondli","Patparganj","Laxmi Nagar","Vishwas Nagar","Krishna Nagar",
+                  "Gandhi Nagar","Shahdara","Seemapuri","Rohtas Nagar","Seelampur","Ghonda","Babarpur","Gokalpur"];
+//  8 recognized national parties
+  party=["All India Trinamool Congress","Bahujan Samaj Party","Bharatiya Janata Party","Communist Party of India",
+        "Communist Party of India (Marxist)","Indian National Congress","National People's Party","	Nationalist Congress Party"];
+  image=["https://upload.wikimedia.org/wikipedia/commons/thumb/b/b8/All_India_Trinamool_Congress_symbol.svg/150px-All_India_Trinamool_Congress_symbol.svg.png",
+        "https://upload.wikimedia.org/wikipedia/commons/thumb/9/98/Indian_Election_Symbol_Elephant.png/225px-Indian_Election_Symbol_Elephant.png",
+        "https://upload.wikimedia.org/wikipedia/commons/thumb/e/e8/BJP_election_symbol.png/150px-BJP_election_symbol.png",
+        "https://upload.wikimedia.org/wikipedia/commons/thumb/d/de/Indian_Election_Symbol_Ears_of_Corn_and_Sickle.png/225px-Indian_Election_Symbol_Ears_of_Corn_and_Sickle.png",
+        "https://upload.wikimedia.org/wikipedia/commons/thumb/4/4f/Indian_Election_Symbol_Hammer_Sickle_and_Star.png/150px-Indian_Election_Symbol_Hammer_Sickle_and_Star.png",
+        "https://upload.wikimedia.org/wikipedia/commons/thumb/d/d7/Hand_INC.svg/261px-Hand_INC.svg.png",
+        "https://upload.wikimedia.org/wikipedia/commons/thumb/b/b8/Indian_Election_Symbol_Book.svg/150px-Indian_Election_Symbol_Book.svg.png",
+        "https://upload.wikimedia.org/wikipedia/commons/2/28/Nationalist_Congress_Party_Election_Symbol.png",
+      ];
   componentDidMount = async () => {
     try {
       // Get network provider and web3 instance.
@@ -54,10 +76,10 @@ class App extends Component {
 
     // const responselist = await contract.methods.getCandidates(1).call();
     // console.log(responselist[2]);
-    
+    const voteStatus = await contract.methods.getStatus().call();
     // const response = await contract.candidatesCount;
     // Update state with the result.
-    this.setState({ storageValue: response,totalCandidate:response,});
+    this.setState({ storageValue: response,totalCandidate:response});
     // listC:responselist,});
    
     var cardprofile=[];
@@ -72,7 +94,7 @@ class App extends Component {
         gender={result[2]} key={result[0]} 
         number={result[0]} count={result[3]}/>);
     }
-    this.setState({cardprofileView:cardprofile,});
+    this.setState({cardprofileView:cardprofile,status:voteStatus,});
   };
 
   handleValue=(event)=>{
@@ -85,6 +107,7 @@ class App extends Component {
   // setting new value to contract variable
 
   addNewCandidate=async ()=>{
+    alert(this.state.candidParty+"=>"+this.state.candidEmail+"=>"+this.state.candidPan+"=>"+this.state.candidConstituency);
     const { accounts, contract,} = this.state;
     // name and then gender
     if(this.state.candidName!==''&&this.state.candidGender!==''){
@@ -92,9 +115,9 @@ class App extends Component {
         errorAdd:false,
         addFlag:false,
       });
-      await contract.methods.addCandidate(this.state.candidName,this.state.candidGender).send({from: accounts[0]});
+      // await contract.methods.addCandidate(this.state.candidName,this.state.candidGender).send({from: accounts[0]});
       
-        this.runExample();
+        // this.runExample();
 
     }
     else{
@@ -111,10 +134,42 @@ class App extends Component {
         uname:n,
       })
   }
+  
   getCandidatename=event=>{
     var n=event.target.value;
     this.setState({
         candidName:n,
+      })
+  }
+  getCandidateConstituency=event=>{
+    var n=event.target.value;
+    console.log(" Selected!!"+n);
+    this.setState({
+        candidConstituency:n,
+      })
+  }
+  getCandidatePan=event=>{
+    var n=event.target.value;
+    this.setState({
+        candidPan:n,
+      })
+  }
+  getCandidateNumber=event=>{
+    var n=event.target.value;
+    this.setState({
+        candidNumber:n,
+      })
+  }
+  getCandidateEmail=event=>{
+    var n=event.target.value;
+    this.setState({
+        candidEmail:n,
+      })
+  }
+  getCandidateParty=event=>{
+    var n=event.target.value;
+    this.setState({
+        candidParty:n,
       })
   }
   getCandidateGender=event=>{
@@ -190,11 +245,13 @@ class App extends Component {
                 <label htmlFor="password"><b>Password</b></label>
                 <input type="password"  onChange={this.getPassword} placeholder="Enter Password" name="psw" required />
                 <br />
+                
+                <br />
               {(!this.state.loginStatus&&this.state.try)&&<p className='error'>Invalid Credentials</p>}
 
                 <button  onClick={this.handleLogin}>Login</button>
                 <br />
-              <input type="checkbox"  name="remember" onClick={()=>{this.setState({uname:'admin',upass:'admin'})}} /> Remember me
+              {/* <input type="checkbox"  name="remember" onClick={()=>{this.setState({uname:'admin',upass:'admin'})}} /> Remember me */}
               </div>
           </div>)
         }
@@ -210,7 +267,8 @@ class App extends Component {
                        src='https://www.w3schools.com/howto/img_avatar.png'  alt='Account'/>
                     <span className='col-lg-4 w3-left w3-padding' ><b>{this.state.uname.trim().toUpperCase()}</b></span>
                     <Button className='logout col-lg-4 w3-right' onClick={()=>{this.setState({loginFlag:false, loginStatus:false,try:false,close:false,uname:'',upass:''})}}>
-                      Log Out
+                 {/* {this.state.status}  */}
+                     Log Out
                     </Button>
 
                     <span className='col-lg-4  w3-padding' > Welcome you as {this.state.type} User
@@ -239,7 +297,24 @@ class App extends Component {
                              <hr />
                           </div>):
                       (
-                       <div className='w3-container w3-padding container w3-full'>
+                       <div className='w3-container w3-padding container w3-full' style={{overflow:"auto",height:"90vh"}}>
+                            <label htmlFor="cname"><b>Party Name   </b></label>
+                            {/* <input type="text"  onChange={this.getCandidateParty} placeholder="Enter Party Name" name="uparty" required="required" /> */}
+                           
+                            <select  value={this.state.candidParty} onChange={this.getCandidateParty}>
+                                  {this.party.map((i,k)=>(
+                                  <option value={i}>{i}</option>
+                                  ))}
+                            </select>
+
+                            <br />
+                            <br />
+                            <label htmlFor="cgender"><b>Constituency: </b></label>  
+                            <select  value={this.state.candidConstituency} onChange={this.getCandidateConstituency}>
+                                  {this.constituencyDelhi.map((i)=>(
+                                  <option value={i}> {i} </option>
+                                  ))}
+                            </select><br /><br />
                             <label htmlFor="cname"><b>Candidate Full Name   </b></label>
                             <input type="text"  onChange={this.getCandidatename} placeholder="Enter Username" name="uname" required />
                             <br />
@@ -250,6 +325,20 @@ class App extends Component {
                             <input type='radio' name='gender' onChange={this.getCandidateGender} value='F' />Female 
                             
                             <br />
+                            <label htmlFor="cname"><b>Candidate PAN Number   </b></label>
+                            <input type="text"  onChange={this.getCandidatePan} placeholder="PAN Number" name="upan" required />
+                            <br />
+                            <br />
+                            <label htmlFor="cname"><b>Candidate Mobile Number:   </b></label>
+                            <input type="number"  onChange={this.getCandidateNumber} placeholder="Mobile Number" name="umobile" required />
+                            <br />
+                            <br />
+
+                            <label htmlFor="cname"><b>Candidate Email ID   </b></label>
+                            <input type="email"  onChange={this.getCandidateEmail} placeholder="Email Id" name="uemail" required />
+                            <br />
+                            <br />
+                {/* <h1>{this.state.candidConstituency}</h1> */}
                           {(this.state.errorAdd&&this.state.addFlag)&&<p className='error'>Invalid Credentials</p>}
                           <br />
                             <button  className='w3-btn w3-large' onClick={this.addNewCandidate}>Add Candidate</button>
@@ -274,7 +363,10 @@ class App extends Component {
                     Total Candidates: <b>{this.state.storageValue}</b>
                 </div>
                 <div className='w3-row w3-padding  '>
-                  {this.state.cardprofileView}
+                  {/* <h1>{this.state.status}</h1> */}
+                  {this.state.cardprofileView} {/*(this.state.type==='admin')&&*/}
+                  {/* {(!this.state.status==="false"&&this.state.type!=='admin')&&this.state.cardprofileView} */}
+                  {/* {(this.state.status==="true"&&this.state.type!='admin')&&<h1>You have already Voted.Thanks for the voting.</h1>} */}
                 </div>
 
               </div>
